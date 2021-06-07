@@ -1,0 +1,76 @@
+from time import time
+graph = {
+    'Catalog': ['Vegetables', 'Fruits'],
+    'Vegetables': ['Under the Ground', 'Above the Ground'],
+    'Fruits': ['Citrus', 'Stone Fruit', 'Berries', 'Tropical', 'Melons'],
+    'Under the Ground': ['Yam', 'Beet', 'Turnip', 'Carrot', 'Onion', 'Garlic', 'Radish', 'Turmeric'],
+    'Above the Ground': ['Lettuce', 'Cucumber', 'Pumpkins', 'Tomatoes', 'Peas', 'Brocolli', 'Lady Finger'],
+    'Citrus':['Orange', 'Grapefruit', 'Lime'],
+    'Stone Fruit':['Apricot', 'Peach', 'Plum'], 
+    'Berries':['Strawberry', 'Raspberry', 'Blueberry', 'Kiwi'], 
+    'Tropical':['Banana', 'Mango'], 
+    'Melons':['Watermelon', 'Muskmelon'],
+    'Yam': [],
+    'Beet':[],
+    'Turnip':[],
+    'Carrot':[], 
+    'Onion':[], 
+    'Garlic':[], 
+    'Radish':[], 
+    'Turmeric':[],
+    'Lettuce':[],
+    'Cucumber':[], 
+    'Pumpkins':[], 
+    'Tomatoes':[], 
+    'Peas':[], 
+    'Brocolli':[], 
+    'Lady Finger':[],
+    'Orange':[], 
+    'Grapefruit':[], 
+    'Lime':[],
+    'Apricot':[], 
+    'Peach':[], 
+    'Plum':[],
+    'Strawberry':[], 
+    'Raspberry':[], 
+    'Blueberry':[], 
+    'Kiwi':[], 
+    'Banana':[], 
+    'Mango':[], 
+    'Watermelon':[], 
+    'Muskmelon':[]
+}
+
+setOfPreviousNodesDFS = set()
+def depthFirstSearch(setOfPreviousNodesDFS, graph, node):
+  if node not in setOfPreviousNodesDFS:
+    print(node)
+    setOfPreviousNodesDFS.add(node)
+    for neighbour in graph[node]:
+      depthFirstSearch(setOfPreviousNodesDFS, graph, neighbour)
+
+setOfPreviousNodesBFS = set()
+queue = []
+
+def breadthFirstSearch(setOfPreviousNodesBFS, graph, node):
+  setOfPreviousNodesBFS.add(node)
+  queue.append(node)
+  while queue:
+    s = queue.pop(0) 
+    print (s) 
+    for neighbour in graph[s]:
+      if neighbour not in setOfPreviousNodesBFS:
+        setOfPreviousNodesBFS.add(neighbour)
+        queue.append(neighbour)
+
+t0 = time()
+depthFirstSearch(setOfPreviousNodesDFS, graph, 'Catalog')
+t1 = time() - t0
+print("\nTime taken for Depth-First Search:", t1,"seconds\n")
+
+print("----------------------------------------------------------------")
+
+t2 = time()
+breadthFirstSearch(setOfPreviousNodesBFS, graph, 'Catalog')
+t3 = time() - t2
+print("\nTime taken for Breadth-First Search:", t3,"seconds")
